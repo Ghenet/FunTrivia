@@ -1,9 +1,36 @@
 import React from 'react'
 
-const QuestionCard = () => {
+//give types to the props 
+type Props = {
+    question: string;
+    answers: string[];
+    callback: any;
+    userAnswer: boolean;
+    questionNr: number;
+    totalQuestions: number;
+
+}
+
+//add type functional component to QuestionCard  and destructure the props
+const QuestionCard: React.FC<Props> = ({question, answers, callback, userAnswer, questionNr, totalQuestions }) => {
     return (
         <div>
-            Question Card
+            //adds the question number
+            <p className="number">
+                Question: {questionNr} / {totalQuestions}
+            </p>
+            //adds the question
+            <p dangerouslySetInnerHTML={{ __html: question }} />
+            //adds the answer choices
+            <div>
+                {answers.map(answer => (
+                    <div> 
+                        <button disabled={userAnswer} onClick={callback}>
+                            <span dangerouslySetInnerHTML={{ __html: answer }} />
+                        </button>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }
