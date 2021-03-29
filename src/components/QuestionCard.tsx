@@ -1,20 +1,23 @@
 import React from 'react'
+import { AnswerObject } from '../App';
+import { Wrapper, ButtonWrapper } from './QuestionCard.styles';
 
 //give types to the props 
 type Props = {
     question: string;
     answers: string[];
-    callback: any;
-    userAnswer: any;
+    callback: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    userAnswer: AnswerObject | undefined;
     questionNr: number;
     totalQuestions: number;
 
 }
 
 //add type functional component to QuestionCard  and destructure the props
-const QuestionCard: React.FC<Props> = ({question, answers, callback, userAnswer, questionNr, totalQuestions }) => {
+const QuestionCard: React.FC<Props> = ({
+    question, answers, callback, userAnswer, questionNr, totalQuestions }) => {
     return (
-        <div>
+        <Wrapper>
             {/* adds the question number */}
             <p className="number">
                 Question: {questionNr} / {totalQuestions}
@@ -24,14 +27,18 @@ const QuestionCard: React.FC<Props> = ({question, answers, callback, userAnswer,
             {/* adds the answer choices */}
             <div>
                 {answers.map(answer => (
-                    <div key={answer}> 
-                        <button disabled={userAnswer} value={answer} onClick={callback}>
+                    <ButtonWrapper
+                     key={answer} 
+                     correct={userAnswer?.correctAnswer === answer}
+                     userClicked={userAnswer?.answer === answer}
+                     > 
+                        <button disabled={userAnswer? true : false} value={answer} onClick={callback}>
                             <span dangerouslySetInnerHTML={{ __html: answer }} />
                         </button>
-                    </div>
+                    </ButtonWrapper>
                 ))}
             </div>
-        </div>
+        </Wrapper>
     )
 }
 
