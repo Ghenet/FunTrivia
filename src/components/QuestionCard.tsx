@@ -15,16 +15,16 @@ type Props = {
 const QuestionCard: React.FC<Props> = ({question, answers, callback, userAnswer, questionNr, totalQuestions }) => {
     return (
         <div>
-            //adds the question number
+            {/* adds the question number */}
             <p className="number">
                 Question: {questionNr} / {totalQuestions}
             </p>
-            //adds the question
+            {/* adds the question */}
             <p dangerouslySetInnerHTML={{ __html: question }} />
-            //adds the answer choices
+            {/* adds the answer choices */}
             <div>
                 {answers.map(answer => (
-                    <div> 
+                    <div key={answer}> 
                         <button disabled={userAnswer} onClick={callback}>
                             <span dangerouslySetInnerHTML={{ __html: answer }} />
                         </button>
