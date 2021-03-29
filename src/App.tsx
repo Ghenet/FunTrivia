@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import QuestionCard from './components/QuestionCard';
 import { fetchQuizQuestions } from './API';
-import { GlobalStyle } from './App.styles';
+import { GlobalStyle, Wrapper } from './App.styles';
 
 
 //Types 
@@ -51,7 +51,7 @@ const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
     if(correct) setScore((prev) => prev + 1);
     //save answer in the array for user answers
     const answerObject = {
-      question : questions[number].questions,
+      question : questions[number].question,
       answer,
       correct,
       correctAnswer: questions[number].correct_answer
@@ -77,8 +77,8 @@ const nextQuestion = () => {
   return (
     <>
     <GlobalStyle />
-    <div className="App">
-      <h1>REACT QUIZ</h1>
+    <Wrapper>
+      <h1>FUN  TRIVIA</h1>
       {/* displays the start button if game is over or all answers are answered */}
       {gameOver || userAnswers.length === TOTAL_QUESTIONS ? ( 
       <button className="start" onClick= {startTrivia}>
@@ -91,7 +91,7 @@ const nextQuestion = () => {
       <QuestionCard 
         questionNr={number + 1}
         totalQuestions={TOTAL_QUESTIONS}
-        question={questions[number].questions}
+        question={questions[number].question}
         answers={questions[number].answers}
         userAnswer={userAnswers ? userAnswers[number] : undefined }
         callback={checkAnswer} 
@@ -102,7 +102,7 @@ const nextQuestion = () => {
         Next Question
       </button>
       ) : null}
-    </div>
+    </Wrapper>
     </>
   );
 }

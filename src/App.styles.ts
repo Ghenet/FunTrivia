@@ -18,7 +18,7 @@ export const GlobalStyle = createGlobalStyle`
 
     * {
         box-sizing: border-box;
-        font-family: 'Oswald',sans-serif;
+        font-family: 'Lobster+Two',sans-serif;
     }
 `;
 
@@ -38,7 +38,7 @@ export const Wrapper = styled.div`
     }
 
     h1 {
-        font-family: Fascinate Inline, sans-serif;
+        font-family: Playball, sans-serif;
         backround-image: linear-gradient(180deg, #fff, #87f1ff);
         background-size: 100%;
         background-clip: text;
