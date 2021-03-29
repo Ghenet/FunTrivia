@@ -25,7 +25,7 @@ const App = () => {
 
   // console.log(fetchQuizQuestions(TOTAL_QUESTIONS,Difficulty.EASY));
 
-  //calls the api
+  //calls the api and start the game
   const startTrivia = async () => {
     setLoading(true);
     setGameOver(false);
@@ -40,6 +40,22 @@ const App = () => {
   }
 // checks the answers
 const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
+  if(!gameOver) {
+    //user's answers
+    const answer = e.currentTarget.value;
+    //check answer against correct answer
+    const correct = questions[number].correct_answer === answer;
+    //add score if answer is correct
+    if(correct) setScore((prev) => prev + 1);
+    //save answer in the array for user answers
+    const answerObject = {
+      question : questions[number].questions,
+      answer,
+      correct,
+      correctAnswer: questions[number].correct_answer
+    };
+    setUserAnswers((prev) => [...prev, answerObject]);
+  }
 
 }
 //next question button
